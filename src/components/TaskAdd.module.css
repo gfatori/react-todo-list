@@ -19,6 +19,8 @@
     flex: none;
     order: 0;
     flex-grow: 1;
+    color: var(--gray-200);
+    outline: 0px;
 }
 
 .createButton {
@@ -31,12 +33,15 @@
     gap: 8px;
     width: 90px;
     height: 52px;
-
     background: var(--blue-300);
     border-radius: 8px;
-
     flex: none;
     order: 1;
     flex-grow: 0;
     color: var(--gray-100);
+    cursor: pointer;
+}
+
+strong {
+    color: var(--purple-300);
 }

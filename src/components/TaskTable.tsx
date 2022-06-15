@@ -1,7 +1,16 @@
 import { TaskItem } from './TaskItem';
 import styles from './TaskTable.module.css';
 
-export function TaskTable () {
+interface Tasks {
+  tasks: Task[];
+}
+
+interface Task  {
+  isDone: boolean;
+  taskTitle: string;
+}
+
+export function TaskTable ({ tasks }: Tasks) {
     return (
       <div className={styles.taskTableContainer}>
           <header className={styles.header}>
@@ -15,9 +24,20 @@ export function TaskTable () {
             </div>
           </header>
             <div className={styles.taskList}>
-            <TaskItem />
-            <TaskItem />
-            <TaskItem />
+            {tasks.map((task) => {
+              return (
+                <TaskItem 
+                key={task.taskTitle} 
+                taskTitle={task.taskTitle} 
+                isDone={task.isDone}
+                />
+              );
+            })
+            }
+            
+            {/* <TaskItem /> */}
+            {/* <TaskItem /> */}
+            {/* <TaskItem /> */}
             </div>
       </div>  
     );
