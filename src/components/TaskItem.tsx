@@ -13,7 +13,9 @@ export function TaskItem ({ isDone, taskTitle }: Task) {
             <input className={styles.check} type="checkbox">
             </input>
             <span> {taskTitle} </span>
-            <Trash size={32}/>
+            <button className={styles.trash}>
+                <Trash size={32}/>
+            </button>
         </div>
     );
 }

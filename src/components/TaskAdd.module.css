@@ -33,7 +33,7 @@
     gap: 8px;
     width: 90px;
     height: 52px;
-    background: var(--blue-300);
+    background: var(--blue-700);
     border-radius: 8px;
     flex: none;
     order: 1;
@@ -42,6 +42,9 @@
     cursor: pointer;
 }
 
+.createButton:hover {
+    background: var(--blue-300);
+}
 strong {
     color: var(--purple-300);
 }
