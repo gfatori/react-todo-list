@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 import styles from './TaskAdd.module.css'
 
 interface Task  {
+    id: string | null;
     isDone: boolean;
     taskTitle: string;
 }
@@ -13,7 +14,7 @@ interface Tasks {
 
 interface TaskAddProps {
     newTask: Task;
-    onNewTask: (newtask: Task) => void;
+    onNewTask: (newTask: Task) => void;
     onTaskChange: (newTaskTitle: string) => void;
     taskList: Task[];
   }
@@ -21,18 +22,17 @@ interface TaskAddProps {
 
 export function TaskAdd ({ taskList, newTask, onNewTask, onTaskChange, }: TaskAddProps) {
     
-    function handleNewTaskInvalid (event: InvalidEvent<HTMLTextAreaElement>) {
+    function handleNewTaskInvalid (event: InvalidEvent<HTMLInputElement>) {
         event.target.setCustomValidity('Por favor, digite sua tarefa.')
     }
 
-    function handleNewTask(event: FormEvent<HTMLTextAreaElement>) {
+    function handleNewTask(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        // onNewTask({ taskTitle: '', isDone: false });
         onNewTask(newTask);
-        console.log(taskList)
+        console.log(newTask)
     }
 
-    function handleTaskChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    function handleTaskChange(event: ChangeEvent<HTMLInputElement>) {
         event.preventDefault()
         event.target.setCustomValidity('')
         let newTaskTitle = event.target.value;

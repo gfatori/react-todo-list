@@ -1,16 +1,24 @@
 import { TaskItem } from './TaskItem';
 import styles from './TaskTable.module.css';
 
+
 interface Tasks {
   tasks: Task[];
 }
 
 interface Task  {
+  id: string | null;
   isDone: boolean;
   taskTitle: string;
 }
 
-export function TaskTable ({ tasks }: Tasks) {
+interface TaskTableProps {
+  tasks: Task[];
+  taskStatusChange: (taskTitle: string) => void;
+  onTaskDelete: (taskTitle: string) => void;
+}
+
+export function TaskTable ({ tasks, taskStatusChange, onTaskDelete }: TaskTableProps) {
     return (
       <div className={styles.taskTableContainer}>
           <header className={styles.header}>
@@ -26,18 +34,17 @@ export function TaskTable ({ tasks }: Tasks) {
             <div className={styles.taskList}>
             {tasks.map((task) => {
               return (
-                <TaskItem 
-                key={task.taskTitle} 
+                <TaskItem
+                key={task.id}
+                id={task.id} 
                 taskTitle={task.taskTitle} 
                 isDone={task.isDone}
+                onTaskStatusChange={taskStatusChange}
+                onTaskDelete={onTaskDelete}
                 />
               );
             })
             }
-            
-            {/* <TaskItem /> */}
-            {/* <TaskItem /> */}
-            {/* <TaskItem /> */}
             </div>
       </div>  
     );

@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 import { TaskAdd } from "./TaskAdd";
 import { TaskTable } from "./TaskTable";
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './TaskController.module.css';
 
@@ -8,24 +9,45 @@ interface Tasks {
     tasks: Task[];
 }
   
- interface Task  {
-   isDone: boolean;
-   taskTitle: string;
-}
+interface Task  {
+    id: string | null;
+    isDone: boolean;
+    taskTitle: string;
+ }
 
 export function TaskController ({ tasks }: Tasks) {
     const initialTasks: Task[] = tasks;
-    const emptyTask: Task = { isDone: false, taskTitle: '' };
+    // const emptyTask: Task = 
+    // emptyTask:{} as Task;
     const [taskList, setTaskList] = useState(initialTasks);
-    const [newTask, setNewTask] = useState(emptyTask);
+    const [newTask, setNewTask] = useState<{ id: null | string, isDone: false | boolean, taskTitle: '' | string}>({ id: null, isDone: false, taskTitle: '' });
 
     function NewTaskChange (newTaskTitle: string) {
-        setNewTask({ taskTitle: newTaskTitle, isDone: false });
-      }
+        setNewTask({ id: uuidv4(), taskTitle: newTaskTitle, isDone: false });
+    }
     
     function CreateNewTask (newTask: Task) {
         setTaskList([...taskList, newTask]) // sets the new task to the taskList
-        setNewTask({ taskTitle: '', isDone: false }); // clears the task state
+        setNewTask({ id: null, taskTitle: '', isDone: false }); // clears the task state
+    }
+
+    function taskStatusChange (taskToChange: string) {
+        console.log("before change: ");
+        console.log(taskList)
+        const newTaskList = taskList.map(task => {
+            if (task.taskTitle === taskToChange) {
+                return {...task, isDone: !task.isDone};
+            }
+            return task;
+        })
+        setTaskList(newTaskList);
+    }
+
+    function deleteTask (taskToDelete: string) {
+        const tasksWithoutDeletedOne = taskList.filter(task => {
+            return task.taskTitle !== taskToDelete
+        })  
+        setTaskList(tasksWithoutDeletedOne);
     }
 
     return (
@@ -38,6 +60,8 @@ export function TaskController ({ tasks }: Tasks) {
             />
             <TaskTable 
             tasks={taskList}
+            taskStatusChange={taskStatusChange}
+            onTaskDelete={deleteTask}
             />
         </div>
     );
