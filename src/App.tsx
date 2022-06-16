@@ -10,20 +10,19 @@ import { v4 as uuidv4 } from 'uuid';
 const lorem = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae saepe dignissimos perferendis ducimus.'
 
 
-interface Task  {
+interface Task {
   id: string | null;
   isDone: boolean;
   taskTitle: string;
 }
 
-// interface Tasks extends Array<Task> {}
-
 const tasks: Task[] = [
-  { id: uuidv4(), isDone: false, taskTitle: "[111] - " + "Texto pequeno para teste." },
-  { id: uuidv4(), isDone: false, taskTitle: "[222] - " + lorem },
-  { id: uuidv4(), isDone: false, taskTitle: "[333] - " + lorem },
-  { id: uuidv4(), isDone: true, taskTitle: "[444] - " + lorem },
-  { id: uuidv4(), isDone: true, taskTitle: "[555] - " + lorem },
+  { id: uuidv4(), isDone: false, taskTitle: "[1] - " + "Texto pequeno para teste." },
+  { id: uuidv4(), isDone: false, taskTitle: "[2] - " + lorem },
+  { id: uuidv4(), isDone: false, taskTitle: "[3] - " + lorem },
+  { id: uuidv4(), isDone: true, taskTitle: "[4] - " + lorem },
+  { id: uuidv4(), isDone: true, taskTitle: "[5] - " + lorem },
+  { id: uuidv4(), isDone: false, taskTitle: "[6] - " + "Não quero fazer essa task!" },
 ];
 
 function App() {
@@ -32,7 +31,7 @@ function App() {
       <Header />
       <div className={styles.wrapper}>
         <main className={styles.mainContent}>
-          <TaskController tasks={tasks}/>
+          <TaskController tasks={tasks} />
         </main>
       </div>
     </div>

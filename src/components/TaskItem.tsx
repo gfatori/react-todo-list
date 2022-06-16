@@ -1,6 +1,5 @@
 import { Trash } from 'phosphor-react';
 import styles from './TaskItem.module.css';
-import { MouseEvent, ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 
 
 interface TaskItemProps {
@@ -12,24 +11,14 @@ interface TaskItemProps {
 }
 
 export function TaskItem({ id, isDone, taskTitle, onTaskStatusChange, onTaskDelete }: TaskItemProps) {
-    const [animation, setAnimation] = useState('open');
-
-    
-    // const hide = async (ms: number) => {
-    //     setAnimation('close');
-    //     await new Promise(r => setTimeout(r, ms));
-    // }
-
     function handleTaskStatusChange() {
         onTaskStatusChange(taskTitle);
     }
 
     async function handleTaskDelete() {
-        // setAnimation('close');
-        // await new Promise(r => setTimeout(r, 500));
         onTaskDelete(taskTitle);
     }
-    
+
     return (
         <div className={styles.task}>
             <input
@@ -42,9 +31,9 @@ export function TaskItem({ id, isDone, taskTitle, onTaskStatusChange, onTaskDele
             >
             </input>
             {isDone ? (
-                <del> { taskTitle } </del>)
+                <del> {taskTitle} </del>)
                 : (
-                <span> { taskTitle } </span>
+                    <span> {taskTitle} </span>
                 )}
             <button
                 title='Excluir tarefa'
