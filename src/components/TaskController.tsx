@@ -17,10 +17,17 @@ interface Task  {
 
 export function TaskController ({ tasks }: Tasks) {
     const initialTasks: Task[] = tasks;
-    // const emptyTask: Task = 
-    // emptyTask:{} as Task;
     const [taskList, setTaskList] = useState(initialTasks);
     const [newTask, setNewTask] = useState<{ id: null | string, isDone: false | boolean, taskTitle: '' | string}>({ id: null, isDone: false, taskTitle: '' });
+
+    const [doneCounter, setDoneCounter] = useState(countDoneTasks(tasks));
+
+    function countDoneTasks (tasks: Task[]) {
+        const count = tasks.filter(task => {
+            return task.isDone === true
+        });
+        return count.length;
+    }
 
     function NewTaskChange (newTaskTitle: string) {
         setNewTask({ id: uuidv4(), taskTitle: newTaskTitle, isDone: false });
@@ -32,10 +39,9 @@ export function TaskController ({ tasks }: Tasks) {
     }
 
     function taskStatusChange (taskToChange: string) {
-        console.log("before change: ");
-        console.log(taskList)
         const newTaskList = taskList.map(task => {
             if (task.taskTitle === taskToChange) {
+                task.isDone ? setDoneCounter(doneCounter - 1) : setDoneCounter(doneCounter + 1);
                 return {...task, isDone: !task.isDone};
             }
             return task;
@@ -46,8 +52,9 @@ export function TaskController ({ tasks }: Tasks) {
     function deleteTask (taskToDelete: string) {
         const tasksWithoutDeletedOne = taskList.filter(task => {
             return task.taskTitle !== taskToDelete
-        })  
+        })
         setTaskList(tasksWithoutDeletedOne);
+        setDoneCounter(countDoneTasks(tasksWithoutDeletedOne));
     }
 
     return (
@@ -62,6 +69,7 @@ export function TaskController ({ tasks }: Tasks) {
             tasks={taskList}
             taskStatusChange={taskStatusChange}
             onTaskDelete={deleteTask}
+            doneCounter={doneCounter}
             />
         </div>
     );
