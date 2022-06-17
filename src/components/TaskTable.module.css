@@ -54,4 +54,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-top: 2px solid var(--gray-400);
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.noTasks {
+  display: flex;
+  flex-direction: column;
+  color: var(--gray-300);
+  margin-top: 3.9688rem;
+}
+
+.noTasks strong {
+  color: var(--gray-300);
+  margin-top: 1rem;
+}
+
+.noTasks img {
+  align-self: center;
+  height: 52px;
+  width: 52px;
 }

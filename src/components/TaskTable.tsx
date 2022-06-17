@@ -1,5 +1,6 @@
 import { TaskItem } from './TaskItem';
 import styles from './TaskTable.module.css';
+import clipboard from '../assets/clipboard.svg';
 
 interface Task {
   id: string | null;
@@ -27,21 +28,27 @@ export function TaskTable({ tasks, doneCounter, taskStatusChange, onTaskDelete }
           <button className={styles.tasksDoneCount}> {doneCounter} de {tasks.length}</button>
         </div>
       </header>
-      <div className={styles.taskList}>
-        {tasks.map((task) => {
-          return (
-            <TaskItem
-              key={task.id}
-              id={task.id}
-              taskTitle={task.taskTitle}
-              isDone={task.isDone}
-              onTaskStatusChange={taskStatusChange}
-              onTaskDelete={onTaskDelete}
-            />
-          );
-        })
-        }
-      </div>
+        <div className={styles.taskList}>
+          { tasks.length > 0 ? tasks.map((task) => {
+            return (
+              <TaskItem
+                key={task.id}
+                id={task.id}
+                taskTitle={task.taskTitle}
+                isDone={task.isDone}
+                onTaskStatusChange={taskStatusChange}
+                onTaskDelete={onTaskDelete}
+              />
+            );
+          })
+          : <div className={styles.noTasks}>
+            <img src={clipboard} alt="folha de papel" />
+            <strong>Você ainda não tem tarefas cadastradas</strong>
+            <p> Crie tarefas e organize seus itens a fazer</p>
+          </div> 
+          } 
+          
+        </div>
     </div>
   );
 }
