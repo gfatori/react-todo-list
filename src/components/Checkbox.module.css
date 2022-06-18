@@ -1,0 +1,13 @@
+.check {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}

@@ -1,4 +1,5 @@
 import { Trash } from 'phosphor-react';
+import { CheckBox } from './Checkbox';
 import styles from './TaskItem.module.css';
 
 
@@ -21,15 +22,10 @@ export function TaskItem({ id, isDone, taskTitle, onTaskStatusChange, onTaskDele
 
     return (
         <div className={styles.task}>
-            <input
-                name='taskDone'
-                key={id}
-                className={styles.check}
-                type="checkbox"
-                checked={isDone}
-                onChange={handleTaskStatusChange}
-            >
-            </input>
+            <CheckBox
+            checkedInitialState={isDone}
+            onClick={handleTaskStatusChange}
+            />
             {isDone ? (
                 <del> {taskTitle} </del>)
                 : (
