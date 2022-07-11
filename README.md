@@ -1,13 +1,12 @@
 # React To-Do List
 
-Aplicação web de lista de tarefas desenvolvida em React.
+Web App of a To-Do list developed in React.
 
-
-## Instruções para instalação:
-
-- Ter a versão mais atualizada do node.js instalado.
-- Ter o npm instalado.
-
+## Instructions
+You will need to install first:
+- Node.js 
+- npm 
+And then:
 ```
 $ npm install
 ```
